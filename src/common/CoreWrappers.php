@@ -51,10 +51,7 @@ class NetObject implements \ArrayAccess
 
     public function __set (string $name, $value): void
     {
-        if (substr ($name, -5) == 'Event')
-            Events::setEvent ($this->selector, substr ($name, 0, -5), $value);
-        
-        elseif (method_exists ($this, $method = 'set_'. $name))
+        if (method_exists ($this, $method = 'set_'. $name))
             $this->$method ($value);
         
         else try
@@ -80,6 +77,13 @@ class NetObject implements \ArrayAccess
     {
         return Additions::coupleSelector ($this->callMethod ($name,
             array_map ('Empathy\Engine\Additions::uncoupleSelector', $args)));
+    }
+
+    public function on (string $eventName, callable $eventClosure): self
+    {
+        Events::setEvent ($this->selector, $eventName, $eventClosure);
+
+        return $this;
     }
 
     public function dispose (): void
