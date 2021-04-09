@@ -1,0 +1,17 @@
+{
+    "name": "empathy-php/litengine",
+    "description": "Lightweight Empathy Framework engine version",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Podvirnyy Nikita",
+            "email": "suimin.tu.mu.ga.mi@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": [
+            "src/Engine.php"
+        ]
+    }
+}
