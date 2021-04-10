@@ -75,8 +75,9 @@ class NetObject implements \ArrayAccess
 
     public function __call (string $name, array $args)
     {
-        return Additions::coupleSelector ($this->callMethod ($name,
-            array_map ('Empathy\Engine\Additions::uncoupleSelector', $args)));
+        return method_exists ($this, $name) ?
+            call_user_method ($name, $this, ...$args) :
+            Additions::coupleSelector ($this->callMethod ($name, array_map ('Empathy\Engine\Additions::uncoupleSelector', $args)));
     }
 
     public function on (string $eventName, callable $eventClosure): self
